@@ -4,7 +4,9 @@ import json
 from django.conf import settings
 from django.contrib.messages.storage.base import Message
 from django.utils.functional import Promise
-from django.utils import six
+
+# NOTE: Moved six to external requirement in Django 3.x
+import six
 
 
 def encode_message(message):
