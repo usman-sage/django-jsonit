@@ -1,6 +1,6 @@
 import os
 
-from jsonit.http import JSONFormResponse, JSONResponse
+from jsonit.http import JSONFormResponse, JSONResponse, is_ajax
 
 
 class AJAXTemplateResponseMixin(object):
