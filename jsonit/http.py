@@ -205,3 +205,7 @@ class JSONFormResponse(JSONResponse):
                     form_errors = self.details.setdefault('form_errors', {})
                     error_list = form_errors.setdefault(field, [])
                     error_list.extend(errors)
+
+def is_ajax(request):
+    return request.headers.get('x-requested-with') == 'XMLHttpRequest'
+

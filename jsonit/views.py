@@ -38,7 +38,7 @@ class AJAXTemplateResponseMixin(object):
         """
         template_list = super(AJAXTemplateResponseMixin, self)\
                                         .get_template_names(*args, **kwargs)
-        if self.request.is_ajax():
+        if is_ajax(self.request):
             ajax_template_list = []
             for template_name in template_list:
                 name, ext = os.path.splitext(template_name)
@@ -50,7 +50,7 @@ class AJAXTemplateResponseMixin(object):
     def get_context_data(self, *args, **kwargs):
         data = super(AJAXTemplateResponseMixin, self).get_context_data(*args,
                                                                     **kwargs)
-        if self.request.is_ajax():
+        if is_ajax(self.request):
             data['is_ajax'] = True
             data['current_url'] = self.request.get_full_path()
         return data
@@ -86,7 +86,7 @@ class JSONResponseMixin(object):
             forms are provided (more specifically, if :meth:`get_forms` doesn't
             return any) then a :class:`JSONResponse` will be used instead.
         """
-        if not self.request.is_ajax():
+        if not is_ajax(self.request):
             return response
         details = self.get_json_details(details or {}) or None
         kwargs = {'details': details}
